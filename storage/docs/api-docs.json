@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Dingo Api",
+        "version": "2.0.0"
+    },
+    "host": "ucenter.turtletl.com:81",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "\u7528\u6237\u767b\u5f55",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "\u767b\u5f55\u90ae\u7bb1",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "\u767b\u5f55\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "\u7528\u6237\u6ce8\u518c",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "\u7528\u6237\u540d",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "\u767b\u5f55\u90ae\u7bb1",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "\u767b\u5f55\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "register success"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        },
+        "/users/all": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "\u663e\u793a\u6240\u6709\u7528\u6237",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "\u7528\u6237\u51ed\u8bc1",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "all users"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        },
+        "/lessons/all": {
+            "get": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "\u663e\u793a\u6240\u6709\u6559\u7a0b",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "\u7528\u6237\u51ed\u8bc1",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "all lessons"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {},
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "\u9a8c\u8bc1\u6a21\u5757"
+        },
+        {
+            "name": "Users",
+            "description": "\u7528\u6237\u6a21\u5757"
+        },
+        {
+            "name": "Lessons",
+            "description": "\u6559\u7a0b\u6a21\u5757"
+        }
+    ]
+}
