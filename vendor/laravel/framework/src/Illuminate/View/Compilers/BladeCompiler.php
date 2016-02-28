@@ -196,7 +196,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function compileComments($value)
     {
-        $pattern = sprintf('/%s--((.|\s)*?)--%s/', $this->contentTags[0], $this->contentTags[1]);
+        $pattern = sprintf('/%s--(.*?)--%s/s', $this->contentTags[0], $this->contentTags[1]);
 
         return preg_replace($pattern, '<?php /*$1*/ ?>', $value);
     }
@@ -534,7 +534,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function compileBreak($expression)
     {
-        return '<?php break; ?>';
+        return $expression ? "<?php if{$expression} break; ?>" : '<?php break; ?>';
     }
 
     /**
@@ -545,7 +545,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function compileContinue($expression)
     {
-        return '<?php continue; ?>';
+        return $expression ? "<?php if{$expression} continue; ?>" : '<?php continue; ?>';
     }
 
     /**

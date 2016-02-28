@@ -23,8 +23,6 @@ abstract class ApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setupConfig();
-
         Http\Response::setFormatters($this->prepareConfigValues($this->app['config']['api.formats']));
         Http\Response::setTransformer($this->app['api.transformer']);
         Http\Response::setEventDispatcher($this->app['events']);
@@ -47,6 +45,7 @@ abstract class ApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->setupConfig();
         $this->setupClassAliases();
 
         $this->registerExceptionHandler();
@@ -128,7 +127,7 @@ abstract class ApiServiceProvider extends ServiceProvider
         $this->app->singleton('api.exception', function ($app) {
             $config = $app['config']['api'];
 
-            return new ExceptionHandler($app['log'], $config['errorFormat'], $config['debug']);
+            return new ExceptionHandler($app['Illuminate\Contracts\Debug\ExceptionHandler'], $config['errorFormat'], $config['debug']);
         });
     }
 

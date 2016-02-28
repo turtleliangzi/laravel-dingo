@@ -112,6 +112,19 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     }
 
     /**
+     * Get the full URL for the request with the added query string parameters.
+     *
+     * @param  array  $query
+     * @return string
+     */
+    public function fullUrlWithQuery(array $query)
+    {
+        return count($this->query()) > 0
+                        ? $this->url().'/?'.http_build_query(array_merge($this->query(), $query))
+                        : $this->fullUrl().'?'.http_build_query($query);
+    }
+
+    /**
      * Get the current path info for the request.
      *
      * @return string

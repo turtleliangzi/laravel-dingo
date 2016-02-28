@@ -9,6 +9,7 @@ use ArrayAccess;
 use Carbon\Carbon;
 use LogicException;
 use JsonSerializable;
+use DateTimeInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -648,10 +649,10 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     /**
      * Reload a fresh model instance from the database.
      *
-     * @param  array  $with
+     * @param  array|string  $with
      * @return $this|null
      */
-    public function fresh(array $with = [])
+    public function fresh($with = [])
     {
         if (! $this->exists) {
             return;
@@ -2922,17 +2923,19 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     protected function asDateTime($value)
     {
         // If this value is already a Carbon instance, we shall just return it as is.
-        // This prevents us having to reinstantiate a Carbon instance when we know
+        // This prevents us having to re-instantiate a Carbon instance when we know
         // it already is one, which wouldn't be fulfilled by the DateTime check.
         if ($value instanceof Carbon) {
             return $value;
         }
 
-        // If the value is already a DateTime instance, we will just skip the rest of
-        // these checks since they will be a waste of time, and hinder performance
-        // when checking the field. We will just return the DateTime right away.
-        if ($value instanceof DateTime) {
-            return Carbon::instance($value);
+         // If the value is already a DateTime instance, we will just skip the rest of
+         // these checks since they will be a waste of time, and hinder performance
+         // when checking the field. We will just return the DateTime right away.
+        if ($value instanceof DateTimeInterface) {
+            return new Carbon(
+                $value->format('Y-m-d H:i:s.u'), $value->getTimeZone()
+            );
         }
 
         // If this value is an integer, we will assume it is a UNIX timestamp's value
@@ -2963,7 +2966,7 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
      */
     protected function asTimeStamp($value)
     {
-        return (int) $this->asDateTime($value)->timestamp;
+        return $this->asDateTime($value)->getTimestamp();
     }
 
     /**

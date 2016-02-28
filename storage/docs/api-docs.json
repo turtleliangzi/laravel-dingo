@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Dingo Api",
-        "version": "2.0.0"
+        "title": "Laravel-dingo",
+        "version": "1.0.0"
     },
     "host": "ucenter.turtletl.com:81",
     "basePath": "/api",
@@ -81,6 +81,63 @@
                 }
             }
         },
+        "/lessons/all": {
+            "get": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "\u663e\u793a\u6240\u6709\u6559\u7a0b",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "\u7528\u6237\u51ed\u8bc1",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "all lessons"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        },
+        "/lessons/one/{id}": {
+            "get": {
+                "tags": [
+                    "Lessons"
+                ],
+                "summary": "\u663e\u793a\u5355\u4e2a\u6559\u7a0b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "\u7528\u6237\u51ed\u8bc1",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "one lessons"
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error"
+                    }
+                }
+            }
+        },
         "/users/all": {
             "get": {
                 "tags": [
@@ -89,8 +146,8 @@
                 "summary": "\u663e\u793a\u6240\u6709\u7528\u6237",
                 "parameters": [
                     {
-                        "name": "token",
-                        "in": "query",
+                        "name": "Authorization",
+                        "in": "header",
                         "description": "\u7528\u6237\u51ed\u8bc1",
                         "required": true,
                         "type": "string"
@@ -106,16 +163,16 @@
                 }
             }
         },
-        "/lessons/all": {
+        "/users/one": {
             "get": {
                 "tags": [
-                    "Lessons"
+                    "Users"
                 ],
-                "summary": "\u663e\u793a\u6240\u6709\u6559\u7a0b",
+                "summary": "\u83b7\u53d6\u5f53\u524d\u7528\u6237",
                 "parameters": [
                     {
-                        "name": "token",
-                        "in": "query",
+                        "name": "Authorization",
+                        "in": "header",
                         "description": "\u7528\u6237\u51ed\u8bc1",
                         "required": true,
                         "type": "string"
@@ -123,7 +180,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "all lessons"
+                        "description": "one user"
                     },
                     "default": {
                         "description": "an \"unexpected\" error"
