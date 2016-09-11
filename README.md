@@ -7,3 +7,8 @@
 联系方式：1639672490@qq.com
 
 blog地址： [turtletl.com](http://www.turtletl.com)
+
+
+测试项目地址：[pms.turtletl.com](http://pms.turtletl.com)
+svn地址: svn://pms.turtletl.com/pms    svn://pmsapi.turtletl.com/pms_api
+项目上线地址：[pms.anasit.com](http://pms.anasit.com)

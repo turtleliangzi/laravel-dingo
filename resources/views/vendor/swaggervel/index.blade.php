@@ -8,10 +8,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Laravel-dingo</title>
+<title>项目管理系统</title>
 <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 <link href='vendor/swaggervel/css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
 <link href='vendor/swaggervel/css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
 <link href='vendor/swaggervel/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -87,7 +86,7 @@ window.swaggerUi.load();
 <body class="swagger-section">
 <div id='header'>
 <div class="swagger-ui-wrap">
-<a id="logo1" style="text-decoration:none;font-size:24px;font-weight:blod;color:#fff;" href="https://github.com/turtleliangzi/laravel-dingo">Laravel-dingo</a>
+<a id="logo1" style="text-decoration:none;font-size:24px;font-weight:blod;color:#fff;" href="https://github.com/turtleliangzi/laravel-dingo">PMS</a>
 <!--
 <form id='api_selector'>
 <div class='input icon-btn'>

@@ -1,10 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Laravel-dingo",
+        "title": "\u9879\u76ee\u7ba1\u7406\u7cfb\u7edf",
         "version": "1.0.0"
     },
-    "host": "ucenter.turtletl.com:81",
+    "host": "pmsapi.turtletl.com",
     "basePath": "/api",
     "schemes": [
         "http"
@@ -81,12 +81,12 @@
                 }
             }
         },
-        "/lessons/all": {
-            "get": {
+        "/company/add": {
+            "post": {
                 "tags": [
-                    "Lessons"
+                    "Companys"
                 ],
-                "summary": "\u663e\u793a\u6240\u6709\u6559\u7a0b",
+                "summary": "\u65b0\u5efa\u516c\u53f8",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -94,43 +94,32 @@
                         "description": "\u7528\u6237\u51ed\u8bc1",
                         "required": true,
                         "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "all lessons"
                     },
-                    "default": {
-                        "description": "an \"unexpected\" error"
-                    }
-                }
-            }
-        },
-        "/lessons/one/{id}": {
-            "get": {
-                "tags": [
-                    "Lessons"
-                ],
-                "summary": "\u663e\u793a\u5355\u4e2a\u6559\u7a0b",
-                "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id",
+                        "name": "company_name",
+                        "in": "query",
+                        "description": ">\u516c\u53f8\u540d",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "\u7528\u6237\u51ed\u8bc1",
+                        "name": "english_name",
+                        "in": "query",
+                        "description": ">\u82f1\u6587\u540d",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company_code",
+                        "in": "query",
+                        "description": ">\u516c\u53f8\u4ee3\u53f7",
                         "required": true,
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "one lessons"
+                        "description": "add successful"
                     },
                     "default": {
                         "description": "an \"unexpected\" error"
@@ -200,8 +189,8 @@
             "description": "\u7528\u6237\u6a21\u5757"
         },
         {
-            "name": "Lessons",
-            "description": "\u6559\u7a0b\u6a21\u5757"
+            "name": "Companys",
+            "description": "\u516c\u53f8\u6a21\u5757"
         }
     ]
 }

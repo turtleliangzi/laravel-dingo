@@ -1,5 +1,17 @@
 <?php
 
+$allow_origin = array(  
+    'http://pms.turtletl.com', 
+    'http://pms.anasit.com',
+    'http://localhost:8100'
+);  
+  
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : ''; 
+if(in_array($origin, $allow_origin)){  
+    header('Access-Control-Allow-Origin:'.$origin);  
+    header('Access-Control-Allow-Headers:x-requested-with,content-type,authorization');  
+}
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

@@ -35,11 +35,19 @@ class AuthController extends BaseController {
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                $response = array(
+                    'error' => '用户名或密码错误',
+                    'status' => 401
+                );
+                return response()->json($response);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            $response = array(
+                'error' => '创建token时出错',
+                'status' => 500
+            );
+            return response()->json($response);
         }
 
         // all good so return the token
@@ -70,9 +78,59 @@ class AuthController extends BaseController {
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
         ];
+        $userExist = User::findUserEmail($newUser['email']);
+        if (!empty($userExist)) {
+            $response = array(
+                'error' => '该邮箱已注册',
+                'status' => 400
+            );
+            return response()->json($response);
+        }
         $user = User::create($newUser);
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('token'));
+    }
+    /**
+     * @SWG\Post(
+     *   path="/auth/resetPassword",
+     *   summary="重置密码",
+     *   tags={"Auth"},
+     *   @SWG\Response(
+     *     response=200,
+     *     description="modify success"
+     *   ),
+     *   @SWG\Parameter(name="email", in="query", required=true, type="string", description="登录邮箱"),
+     *   @SWG\Parameter(name="password", in="query", required=true, type="string", description="登录密码"),
+     *   @SWG\Parameter(name="resetPassword", in="query", required=true, type="string", description="确认密码"),
+     *   @SWG\Response(
+     *     response="default",
+     *     description="an ""unexpected"" error"
+     *   )
+     * )
+     */
+    public function resetPassword(Request $request){
+        $per = [
+           'email'=>$request ->get('email'),
+           'password'=>bcrypt($request ->get('password')),
+       ];
+        $peo = [
+           'resetPassword'=>bcrypt($request ->get('resetPassword'))
+        ];
+        $userExist = User::findUserEmail($per['email']);
+        if(empty($userExist)){
+            $response = array(
+                'error'=>'用户不存在',
+                'status'=>400,
+                );
+            return response() -> json($response);
+        }
+        $user = User::changePassword($userExist['id'],$per['password']);
+        if($user === false){
+            return $this->errorResponse("重置密码失败");
+        } else {
+            return $this->successResponse("重置密码成功");
+        }
+
     }
 }
