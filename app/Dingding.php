@@ -13,8 +13,8 @@ class Dingding {
      */
 
     public static function getAccessToken() {
-        $corpid = "dinga8db4fc67ff7750a";
-        $corpSecret = "JH0nqk1h7JrdAiedoRzwOJfL9L_SWBTmJEU0uJsYp-OPSvdXc01FC8Kqjcj2m5H6";
+        $corpid = "a";
+        $corpSecret = "J-OPSvdXc01FC8Kqjcj2m5H6";
 
         $ch = curl_init();
         $url = "https://oapi.dingtalk.com/gettoken?corpid=".$corpid."&corpsecret=".$corpSecret;
